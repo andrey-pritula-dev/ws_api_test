@@ -1,0 +1,3 @@
+module.exports = {
+    UPDATE_CURRENCY_DATA: "UPDATE_CURRENCY_DATA",
+}

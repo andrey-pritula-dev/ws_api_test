@@ -1,0 +1,436 @@
+{
+  "openapi": "3.0.0",
+  "servers": [
+    {
+      "url": "http://localhost:6868/"
+    }
+  ],
+  "info": {
+    "title": "Crypto API",
+    "description": "API for tests",
+    "version": "0.0.1"
+  },
+  "paths": {
+    "/api/list": {
+      "get": {
+        "description": "Get list of all crypto currencies",
+        "tags": [
+          "All crypto currencies"
+        ],
+        "security": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "List of all crypto currencies",
+            "schema": {
+              "$ref": "#/components/schemas/all-crypto"
+            }
+          },
+          "404": {
+            "description": "Data not found",
+            "schema": {
+              "$ref": "#/components/schemas/404"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/components/schemas/500"
+            }
+          }
+        }
+      }
+    },
+    "/api/list/id/{id}": {
+      "get": {
+        "description": "Get currency pricing history",
+        "tags": [
+          "Get currency pricing history"
+        ],
+        "security": [],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Name of currency",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "BTC"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all crypto currencies",
+            "schema": {
+              "$ref": "#/components/schemas/one-crypto"
+            }
+          },
+          "404": {
+            "description": "Data not found",
+            "schema": {
+              "$ref": "#/components/schemas/404"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/components/schemas/500"
+            }
+          }
+        }
+      }
+    },
+    "/api/list/limit/{limit}/page/{page}": {
+      "get": {
+        "description": "Get list of all crypto currencies with pagination",
+        "tags": [
+          "All crypto currencies"
+        ],
+        "security": [],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "limit",
+            "description": "Records limit",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "example": "10"
+            }
+          },
+          {
+            "in": "path",
+            "name": "page",
+            "description": "Page number",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "example": "1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all crypto currencies with pagination",
+            "schema": {
+              "$ref": "#/components/schemas/all-crypto"
+            }
+          },
+          "404": {
+            "description": "Data not found",
+            "schema": {
+              "$ref": "#/components/schemas/404"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/components/schemas/500"
+            }
+          }
+        }
+      }
+    },
+    "/api/list/id/{id}/limit/{limit}/page/{page}": {
+      "get": {
+        "description": "Get currency pricing history",
+        "tags": [
+          "Get currency pricing history"
+        ],
+        "security": [],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Name of currency",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "BTC"
+            }
+          },
+          {
+            "in": "path",
+            "name": "limit",
+            "description": "Records limit",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "example": "10"
+            }
+          },
+          {
+            "in": "path",
+            "name": "page",
+            "description": "Page number",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "example": "1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all crypto currencies",
+            "schema": {
+              "$ref": "#/components/schemas/one-crypto"
+            }
+          },
+          "404": {
+            "description": "Data not found",
+            "schema": {
+              "$ref": "#/components/schemas/404"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/components/schemas/500"
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "500": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "example": 500
+          },
+          "data": {
+            "type": "array",
+            "example": []
+          },
+          "message": {
+            "type": "string",
+            "example": "Server error"
+          }
+        }
+      },
+      "404": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "example": 404
+          },
+          "data": {
+            "type": "array",
+            "example": []
+          },
+          "message": {
+            "type": "string",
+            "example": "Data not found"
+          }
+        }
+      },
+      "all-crypto": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "number",
+            "example": "200"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "docs": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "61780ebcce6d0a65b2bde7d7"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "1337"
+                    },
+                    "__v": {
+                      "type": "number",
+                      "example": "0"
+                    },
+                    "asset_id": {
+                      "type": "string",
+                      "example": "1337"
+                    },
+                    "data_end": {
+                      "type": "string",
+                      "example": "2021-10-26T00:00:00.000Z"
+                    },
+                    "data_quote_end": {
+                      "type": "string",
+                      "example": "2021-10-26T13:54:35.136Z"
+                    },
+                    "data_quote_start": {
+                      "type": "string",
+                      "example": "2017-03-18T23:14:07.067Z"
+                    },
+                    "data_start": {
+                      "type": "string",
+                      "example": "2016-11-12T00:00:00.000Z"
+                    },
+                    "type_is_crypto": {
+                      "type": "numbre",
+                      "example": "1"
+                    },
+                    "volume_1day_usd": {
+                      "type": "number",
+                      "example": "0"
+                    },
+                    "volume_1hrs_usd": {
+                      "type": "number",
+                      "example": "0"
+                    },
+                    "volume_1mth_usd": {
+                      "type": "number",
+                      "example": "0"
+                    }
+                  }
+                }
+              },
+              "totalDocs": {
+                "type": "number",
+                "example": 619
+              },
+              "limit": {
+                "type": "number",
+                "example": 100
+              },
+              "totalPages": {
+                "type": "number",
+                "example": 22
+              },
+              "page": {
+                "type": "number",
+                "example": 1
+              },
+              "pagingCounter": {
+                "type": "number",
+                "example": 1
+              },
+              "hasPrevPage": {
+                "type": "boolean",
+                "example": false
+              },
+              "hasNextPage": {
+                "type": "boolean",
+                "example": false
+              },
+              "prevPage": {
+                "type": "number",
+                "example": 2
+              },
+              "nextPage": {
+                "type": "number",
+                "example": 3
+              }
+            }
+          },
+          "message": {
+            "type": "string",
+            "example": "OK"
+          }
+        }
+      },
+      "one-crypto": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "number",
+            "example": "200"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "docs": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "61780ebcce6d0a65b2bde7d7"
+                    },
+                    "time": {
+                      "type": "string",
+                      "example": "2021-10-26T15:16:05.000Z"
+                    },
+                    "__v": {
+                      "type": "number",
+                      "example": "0"
+                    },
+                    "asset_id_base": {
+                      "type": "string",
+                      "example": "BTC"
+                    },
+                    "asset_id_quote": {
+                      "type": "string",
+                      "example": "UNI"
+                    },
+                    "rate": {
+                      "type": "number",
+                      "example": 2250.376938137138
+                    },
+                    "update_in_db_time": {
+                      "type": "string",
+                      "example": "2021-10-26T15:16:05.000Z"
+                    }
+                  }
+                }
+              },
+              "totalDocs": {
+                "type": "number",
+                "example": 619
+              },
+              "limit": {
+                "type": "number",
+                "example": 100
+              },
+              "totalPages": {
+                "type": "number",
+                "example": 22
+              },
+              "page": {
+                "type": "number",
+                "example": 1
+              },
+              "pagingCounter": {
+                "type": "number",
+                "example": 1
+              },
+              "hasPrevPage": {
+                "type": "boolean",
+                "example": false
+              },
+              "hasNextPage": {
+                "type": "boolean",
+                "example": false
+              },
+              "prevPage": {
+                "type": "number",
+                "example": 2
+              },
+              "nextPage": {
+                "type": "number",
+                "example": 3
+              }
+            }
+          },
+          "message": {
+            "type": "string",
+            "example": "OK"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: mongo:5
+    restart: always
+    ports:
+      - "7071:27017"
+    volumes:
+      - db:/data/db
+    networks:
+      - project-network
+  mongo-express:
+    image: mongo-express
+    restart: always
+    environment:
+      - ME_CONFIG_MONGODB_URL=mongodb://mongo:27017
+    depends_on:
+      - mongo
+    ports:
+      - "8888:8081"
+    networks:
+      - project-network
+  app:
+    build: ./app
+    restart: always
+    volumes:
+      - ./app:/app
+    ports:
+      - "6868:3000"
+    stdin_open: true
+    tty: true
+    depends_on:
+      - mongo
+    networks:
+      - project-network
+
+volumes:
+  db:
+networks:
+  project-network:
+    driver: bridge
